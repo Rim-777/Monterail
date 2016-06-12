@@ -1,0 +1,3 @@
+company,invoice_num,invoice_date,operation_date,amount,reporter,notes,status,kind
+CompanyName,testInvoiceNum,2014-10-19,2014-10-11,18068.43,TestReporter,TestNotes,TestStatus,category_1;category_2;category_3
+

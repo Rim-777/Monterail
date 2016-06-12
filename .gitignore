@@ -14,3 +14,4 @@
 /.idea
 .idea
 config/database.yml
+spec/support/files/ImporterAppExample.csv

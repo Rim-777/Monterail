@@ -19,6 +19,6 @@ module ImportApp
                        controller_spec: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
-    config.web_console.development_only = false
+    # config.web_console.development_only = false
   end
 end

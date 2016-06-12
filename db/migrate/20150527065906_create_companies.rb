@@ -5,7 +5,6 @@ class CreateCompanies < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
     add_reference :operations, :company, index: true
   end
 end

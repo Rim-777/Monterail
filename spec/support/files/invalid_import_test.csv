@@ -1,0 +1,22 @@
+company,invoice_num,invoice_date,operation_date,amount,reporter,notes,status,kind
+UnknownCompanyName,testInvoiceNum1,2014-10-19,2014-10-11,18068.43,TestReporter1,Unknown Company,TestStatus1,category_1;category_2;category_3
+
+Company 1,,2014-10-19,2014-10-11,18068.43,TestReporter,No Invoice_num ,TestStatus1,category_1;category_2;category_3
+
+Company 1,testInvoiceNum2,,2014-10-11,18068.43,TestReporter,No Invoice_date,TestStatus1,category_1;category_2;category_3
+
+Company 1,testInvoiceNum3,2014-10-19,,18068.43,TestReporter,No Operation_date,TestStatus1,category_1;category_2;category_3
+
+Company 1,testInvoiceNum4,2014-10-19,2014-10-11,,TestReporter,No Amount,TestStatus1,category_1;category_2;category_3
+
+Company 1,testInvoiceNum5,2014-10-19,2014-10-11,18068.43,TestReporter,No Status,,category_1;category_2;category_3
+
+Company 1,testInvoiceNum6,2014-10-19,2014-10-11,18068.43,TestReporter,No Kind,TestStatus1,
+
+,testInvoiceNum7,2014-10-19,2014-10-11,18068.43,TestReporter,No Company Name, TestStatus1,category_1;category_2;category_3
+
+Company 1,testInvoiceNum8,2014-10-19,2014-10-11,0.00,TestReporter, Invalid Amount,TestStatus1,category_1;category_2;category_3
+
+Company 1,UniqueInvoiceNum,2014-10-19,2014-10-11,18068.43,TestReporter, InvoiceNum is not unique,TestStatus1,category_1;category_2;category_3
+
+
