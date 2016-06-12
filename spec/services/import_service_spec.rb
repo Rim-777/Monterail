@@ -2,28 +2,27 @@ require 'rails_helper'
 require 'csv'
 
 describe 'import service' do
+  let!(:file) { Rails.root.join("spec/support/files/test.csv") }
+  let(:import) { ImportService.new(file) }
 
   describe '#initialize' do
-    let!(:file) { Rails.root.join("spec/support/files/test.csv") }
     it 'assign file-content to @file' do
-      import = ImportService.new(file)
       expect(import.file).to eq file
     end
   end
 
   describe '#perform!' do
     let!(:company_one) { create(:company, name: 'CompanyName') }
-    let(:import) { ImportService.new(file).perform! }
+    let(:perform!) { import.perform! }
 
     describe 'success' do
-      let!(:file) { Rails.root.join("spec/support/files/test.csv") }
+
+      it 'change operations number to database' do
+        expect { perform! }.to change(Operation, :count).by(1)
+      end
 
       context 'operations' do
-        before { import }
-
-        it 'change operations number to database' do
-          expect(Operation.all.count).to eq 1
-        end
+        before { perform! }
 
         it 'assign company id for new operation' do
           expect(Operation.first.company_id).to eq company_one.id
@@ -64,16 +63,16 @@ describe 'import service' do
 
       context 'categories_operation' do
         it 'change categories_operations number in database' do
-          expect { import }.to change(CategoriesOperation, :count).by(3)
+          expect { perform! }.to change(CategoriesOperation, :count).by(3)
         end
 
         it 'add categories_operations for operation' do
-          import
+          perform!
           expect(Operation.first.categories_operations.count).to eq 3
         end
 
         it 'add relation between operation and categories' do
-          import
+          perform!
           expect(Operation.first.categories.pluck(:name).sort).to eq %w(Category_1 Category_2 Category_3).sort
         end
       end
@@ -84,21 +83,19 @@ describe 'import service' do
       let!(:file) { Rails.root.join("spec/support/files/invalid_import_test.csv") }
 
       it 'will not add new operations in database' do
-        expect { import }.to_not change(Operation, :count)
+        expect { perform! }.to_not change(Operation, :count)
       end
 
       it 'will not add new categories_operation in database' do
-        expect { import }.to_not change(CategoriesOperation, :count)
+        expect { perform! }.to_not change(CategoriesOperation, :count)
       end
 
       it 'will not add new categories in database' do
-        expect { import }.to_not change(Category, :count)
+        expect { perform! }.to_not change(Category, :count)
       end
     end
 
     describe 'private methods' do
-      import = ImportService.new(Rails.root.join("spec/support/files/test.csv"))
-
       describe '#find_company' do
         let!(:company_one) { create(:company, name: 'CompanyName') }
 
