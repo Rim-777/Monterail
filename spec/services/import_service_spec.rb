@@ -16,7 +16,6 @@ describe 'import service' do
     let(:perform!) { import.perform! }
 
     describe 'success' do
-
       it 'change operations number to database' do
         expect { perform! }.to change(Operation, :count).by(1)
       end
@@ -105,32 +104,46 @@ describe 'import service' do
       end
 
       describe '#formatted_date' do
+        let(:date) { Date.new(2016, 03, 16) }
+
         it 'return nil if date invalid' do
           expect(import.send(:formatted_date, Date._parse('32-12-2016'))).to eq nil
         end
 
         it 'take date in format YYYY-DD-MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016-16-3'))).to eq Date.new(2016, 03, 16)
+          expect(import.send(:formatted_date, Date._parse('2016-16-03'))).to eq date
         end
 
         it 'take date in format YYYY-MM-DD and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016-3-16'))).to eq Date.new(2016, 3, 16)
+          expect(import.send(:formatted_date, Date._parse('2016-3-16'))).to eq date
         end
 
         it 'take date in format MM-DD-YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('3-16-2016'))).to eq Date.new(2016, 3, 16)
+          expect(import.send(:formatted_date, Date._parse('03-16-2016'))).to eq date
         end
 
         it 'take date in format MM-YYYY-DD and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('3-2016-16'))).to eq Date.new(2016, 3, 16)
+          expect(import.send(:formatted_date, Date._parse('03-2016-16'))).to eq date
         end
 
         it 'take date in format DD-MM-YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16-3-2016'))).to eq Date.new(2016, 3, 16)
+          expect(import.send(:formatted_date, Date._parse('16-03-2016'))).to eq date
         end
 
         it 'take date in format DD-YYYY-MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16-2016-3'))).to eq Date.new(2016, 3, 16)
+          expect(import.send(:formatted_date, Date._parse('16-2016-03'))).to eq date
+        end
+
+        it 'take date in format YYYY/DD/MM and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('2016/16/03'))).to eq date
+        end
+
+        it 'take date in format DD/YYYY/MM and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('16/2016/03'))).to eq date
+        end
+
+        it 'take date in format MM/DD/YYYY and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('03/16/2016'))).to eq date
         end
       end
     end
