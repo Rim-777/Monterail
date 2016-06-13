@@ -7,8 +7,6 @@ class ImportService
   end
 
   def perform!
-    # CSV.foreach('spec/support/files/test.csv', headers: true) do |row|
-    # CSV.foreach('spec/support/files/ImporterAppExample.csv', headers: true) do |row|
     CSV.foreach( file, headers: true) do |row|
       create_operation_by(row)
     end
