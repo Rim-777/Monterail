@@ -1,4 +1,4 @@
-require 'rails_helper'
+mrequire 'rails_helper'
 
 RSpec.describe Operation, type: :model do
   it { should have_many(:categories_operations).dependent(:destroy) }
@@ -71,7 +71,7 @@ RSpec.describe Operation, type: :model do
           expect { described_method }.to_not change(Category, :count)
         end
 
-        it 'create only one new categories_operation in database' do
+        it 'create only one categories_operation in database' do
           expect { described_method }.to change(CategoriesOperation, :count).by(1)
         end
       end
@@ -83,7 +83,7 @@ RSpec.describe Operation, type: :model do
           expect { described_method }.to change(Category, :count).by(1)
         end
 
-        it 'create only one new categories_operation in database' do
+        it 'create only one categories_operation in database' do
           expect { described_method }.to change(CategoriesOperation, :count).by(1)
         end
       end

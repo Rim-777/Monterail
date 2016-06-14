@@ -43,19 +43,19 @@ describe 'import service' do
           expect(Operation.first.amount).to eq 18068.43
         end
 
-        it 'assign reporter date for new operation' do
+        it 'assign reporter for new operation' do
           expect(Operation.first.reporter).to eq 'TestReporter'
         end
 
-        it 'assign notes date for new operation' do
+        it 'assign notes for new operation' do
           expect(Operation.first.notes).to eq 'TestNotes'
         end
 
-        it 'assign status date for new operation' do
+        it 'assign status for new operation' do
           expect(Operation.first.status).to eq 'TestStatus'
         end
 
-        it 'assign kind date for new operation' do
+        it 'assign kind for new operation' do
           expect(Operation.first.kind).to eq 'category_1;category_2;category_3'
         end
       end
@@ -76,7 +76,7 @@ describe 'import service' do
         expect { perform! }.to_not change(Operation, :count)
       end
 
-      it 'will not add new categories_operation in database' do
+      it 'will not add new categories_operations in database' do
         expect { perform! }.to_not change(CategoriesOperation, :count)
       end
 
@@ -95,7 +95,9 @@ describe 'import service' do
       end
 
       describe '#formatted_date' do
-        let(:date) { Date.new(2016, 03, 16) }
+        let(:final_date) { Date.new(2016, 03, 16) }
+        dates = ['2016-16-03', '2016-03-16', '03-16-2016', '03-2016-16', '16-03-2016', '16-2016-03',
+                 '2016/16/03', '16/2016/03', '03/16/2016', '2016.16.03', '16.2016.03', '03.16.2016']
 
         it 'return nil if number of days is invalid' do
           expect(import.send(:formatted_date, Date._parse('32-12-2016'))).to eq nil
@@ -105,52 +107,10 @@ describe 'import service' do
           expect(import.send(:formatted_date, Date._parse('19-19-2016'))).to eq nil
         end
 
-        it 'take date in format YYYY-DD-MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016-16-03'))).to eq date
-        end
-
-        it 'take date in format YYYY-MM-DD and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016-3-16'))).to eq date
-        end
-
-        it 'take date in format MM-DD-YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('03-16-2016'))).to eq date
-        end
-
-        it 'take date in format MM-YYYY-DD and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('03-2016-16'))).to eq date
-        end
-
-        it 'take date in format DD-MM-YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16-03-2016'))).to eq date
-        end
-
-        it 'take date in format DD-YYYY-MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16-2016-03'))).to eq date
-        end
-
-        it 'take date in format YYYY/DD/MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016/16/03'))).to eq date
-        end
-
-        it 'take date in format DD/YYYY/MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16/2016/03'))).to eq date
-        end
-
-        it 'take date in format MM/DD/YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('03/16/2016'))).to eq date
-        end
-
-        it 'take date in format YYYY.DD.MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('2016.16.03'))).to eq date
-        end
-
-        it 'take date in format DD.YYYY.MM and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('16.2016.03'))).to eq date
-        end
-
-        it 'take date in format MM.DD.YYYY and do format YYYY-MM-DD' do
-          expect(import.send(:formatted_date, Date._parse('03.16.2016'))).to eq date
+        dates.each do |date|
+          it "format #{date} to YYYY-MM-DD" do
+            expect(import.send(:formatted_date, Date._parse(date))).to eq final_date
+          end
         end
       end
     end
