@@ -1,4 +1,4 @@
-mrequire 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe Operation, type: :model do
   it { should have_many(:categories_operations).dependent(:destroy) }
