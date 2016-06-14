@@ -14,7 +14,7 @@ class Operation < ActiveRecord::Base
 
   private
   def define_categories
-    name_list = kind.split(';')
+    name_list = kind.split(';').map! { |name| name.capitalize }.uniq
     present_categories = Category.where(name: name_list)
     name_list -= present_categories.pluck(:name)
 
@@ -24,7 +24,7 @@ class Operation < ActiveRecord::Base
 
   def create_missing_categories_by(name_list)
     name_list.each do |name|
-      categories.create(name: name.capitalize)
+      categories.create(name: name)
     end
   end
 

@@ -60,17 +60,8 @@ describe 'import service' do
         end
       end
 
-      context 'categories_operation' do
-        it 'change categories_operations number in database' do
-          expect { perform! }.to change(CategoriesOperation, :count).by(3)
-        end
-
-        it 'add categories_operations for operation' do
-          perform!
-          expect(Operation.first.categories_operations.count).to eq 3
-        end
-
-        it 'add relation between operation and categories' do
+      context 'categories' do
+        it 'add all category from field kind to operation' do
           perform!
           expect(Operation.first.categories.pluck(:name).sort).to eq %w(Category_1 Category_2 Category_3).sort
         end
@@ -106,8 +97,12 @@ describe 'import service' do
       describe '#formatted_date' do
         let(:date) { Date.new(2016, 03, 16) }
 
-        it 'return nil if date invalid' do
+        it 'return nil if number of days is invalid' do
           expect(import.send(:formatted_date, Date._parse('32-12-2016'))).to eq nil
+        end
+
+        it 'return nil if number of months is invalid' do
+          expect(import.send(:formatted_date, Date._parse('19-19-2016'))).to eq nil
         end
 
         it 'take date in format YYYY-DD-MM and do format YYYY-MM-DD' do
@@ -144,6 +139,18 @@ describe 'import service' do
 
         it 'take date in format MM/DD/YYYY and do format YYYY-MM-DD' do
           expect(import.send(:formatted_date, Date._parse('03/16/2016'))).to eq date
+        end
+
+        it 'take date in format YYYY.DD.MM and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('2016.16.03'))).to eq date
+        end
+
+        it 'take date in format DD.YYYY.MM and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('16.2016.03'))).to eq date
+        end
+
+        it 'take date in format MM.DD.YYYY and do format YYYY-MM-DD' do
+          expect(import.send(:formatted_date, Date._parse('03.16.2016'))).to eq date
         end
       end
     end

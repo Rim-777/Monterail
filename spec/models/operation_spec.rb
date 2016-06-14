@@ -17,4 +17,76 @@ RSpec.describe Operation, type: :model do
     subject { create(:operation) }
     it { should validate_uniqueness_of(:invoice_num) }
   end
+
+  describe '#add_categories!' do
+    let(:described_method) { operation.add_categories! }
+
+    context 'new category' do
+      let!(:operation) { create(:operation, kind: 'new_category;') }
+
+      it 'create new category in database' do
+        expect { described_method }.to change(Category, :count).by(1)
+      end
+
+      it 'create new category in database for operation' do
+        expect { described_method }.to change(operation.categories, :count).by(1)
+      end
+
+      it 'change operation number for category' do
+        described_method
+        expect(Category.first.operations.size).to eq 1
+      end
+
+      it_behaves_like 'Categoriable'
+
+      it "capitalize category name" do
+        described_method
+        expect(operation.categories.first.name).to eq "New_category"
+      end
+    end
+
+    context 'existing category' do
+      let!(:existing_category) { create(:category, name: 'Existing_category') }
+      let!(:operation) { create(:operation, kind: 'existing_category') }
+
+      it 'will not create new category in database' do
+        expect { described_method }.to_not change(Category, :count)
+      end
+
+      it 'change operation number for category' do
+        expect(Category.first.operations.size).to eq 0
+        described_method
+        expect(Category.first.operations.size).to eq 1
+      end
+
+      it_behaves_like 'Categoriable'
+    end
+
+    context 'duplicates of categories' do
+      context 'existing_category' do
+        let!(:existing_category) { create(:category, name: 'Existing_category') }
+        let!(:operation) { create(:operation, kind: 'Existing_category;Existing_category;existing_category') }
+
+        it 'will not create new category in database' do
+          expect { described_method }.to_not change(Category, :count)
+        end
+
+        it 'create only one new categories_operation in database' do
+          expect { described_method }.to change(CategoriesOperation, :count).by(1)
+        end
+      end
+
+      context 'new_category' do
+        let!(:operation) { create(:operation, kind: 'new_category;New_category;new_category') }
+
+        it 'create only one new category in database' do
+          expect { described_method }.to change(Category, :count).by(1)
+        end
+
+        it 'create only one new categories_operation in database' do
+          expect { described_method }.to change(CategoriesOperation, :count).by(1)
+        end
+      end
+    end
+  end
 end
