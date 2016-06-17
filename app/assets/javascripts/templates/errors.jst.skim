@@ -1,0 +1,6 @@
+.container-fluid
+  .row
+    .col-lg-10.col-lg-push-1.col-md-10.col-sm-10.col-xs-10.alert.alert-danger
+      = @message
+      button.close data-dismiss="alert"
+        | x

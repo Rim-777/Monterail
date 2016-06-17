@@ -1,0 +1,59 @@
+.row
+  table.table.table-hover
+    thead
+      tr
+        td
+          | Company:
+        td
+          | Number of operations:
+        td
+          | Average amount:
+        td
+          | Highest month operation:
+        td
+          | Number of accepted operations
+    tbody
+      - for company in @companies
+
+        tr.company_data id="company_#{company['id']}"
+          td
+            = company['name']
+          td
+            = company['operations_numbers']
+          td
+            = company['average_amount']
+          td
+            = company['highest_month_operations']
+          td
+            = company['accepted_operations_num']
+        tr
+          td
+            tr
+              td
+                |invoice number:
+              td
+                |operation date:
+              td
+                |amount:
+              td
+                |reporter:
+              td
+                |status:
+
+            - for operation in company['operations']
+
+              -if company['operations'].indexOf(operation) < 4
+
+
+                tr id="operation_#{operation['id']}"
+                  td
+                    = operation['invoice_num']
+                  td
+                    = operation['operation_date']
+                  td
+                    = operation['amount']
+                  td
+                    = operation['reporter']
+                  td
+                    = operation['status']
+

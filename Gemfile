@@ -9,6 +9,12 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'responders', '~> 2.0'
+gem 'active_model_serializers'
+gem 'slim-rails'
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails'
+gem 'skim'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -19,6 +25,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'byebug'
   gem 'spring'
+  gem 'capybara-webkit'
 end
 
 group  :test do

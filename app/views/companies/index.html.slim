@@ -1,0 +1,15 @@
+.row
+  = form_tag companies_path, method: :get, class: 'import_form', remote: true, data: {type: :json} do
+    .col-md-3
+      = select_tag :category, options_for_select(['Company',
+                                                  'Status',
+                                                  'Kind',
+                                                  'Invoice num',
+                                                  'Reporter']), class: 'form-control'
+    .col-md-7
+      = search_field_tag :query, '', class: 'form-control', placeholder: 'Please write text for search'
+    .col-md-2
+      = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
+br
+.row.companies
+
