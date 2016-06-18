@@ -7,10 +7,11 @@ class ImportService
   end
 
   def perform!
-    CSV.foreach( file, headers: true) do |row|
+    CSV.foreach(file, headers: true) do |row|
       create_operation_by(row)
     end
   end
+
 
   private
   def create_operation_by(row)

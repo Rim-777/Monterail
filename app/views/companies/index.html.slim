@@ -13,9 +13,11 @@
       .col-md-2
         = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
   .col-lg-3
-    = form_tag import_operations_path , method: :post, remote: true do
-      = file_field_tag :file
-      = submit_tag 'Upload'
+    = form_for Import.new, method: :post do |f|
+      = f.file_field :file
+      = f.submit 'Import'
+
+
 
   br
 .row.companies

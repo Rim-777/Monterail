@@ -16,6 +16,8 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'skim'
 gem 'carrierwave'
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', require: nil
 group :development do
   gem 'web-console', '~> 2.0'
 end

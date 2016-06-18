@@ -50,4 +50,3 @@ I want to be able to see all operations grouped by Companies} do
     end
   end
 end
-
