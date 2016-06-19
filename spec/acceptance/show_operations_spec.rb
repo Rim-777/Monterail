@@ -8,7 +8,6 @@ I want to be able to see all operations grouped by Companies} do
   given!(:operation_one) { create(:operation, company_id: company_one.id, status: 'accepted') }
   given!(:operation_two) { create(:operation, company_id: company_two.id) }
 
-
   before do
     visit companies_path
   end

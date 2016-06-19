@@ -13,7 +13,7 @@
       .col-md-2
         = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
   .col-lg-3
-    = form_for Import.new, method: :post do |f|
+    = form_for Import.new, method: :post, remote: true do |f|
       = f.file_field :file
       = f.submit 'Import'
 

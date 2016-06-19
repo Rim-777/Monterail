@@ -18,6 +18,8 @@ gem 'skim'
 gem 'carrierwave'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', require: nil
+gem 'sidekiq-status'
+
 group :development do
   gem 'web-console', '~> 2.0'
 end

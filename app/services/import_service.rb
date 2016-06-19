@@ -12,7 +12,6 @@ class ImportService
     end
   end
 
-
   private
   def create_operation_by(row)
     if row.present?
