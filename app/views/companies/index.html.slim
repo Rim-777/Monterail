@@ -1,13 +1,10 @@
 .row
+  .errors
   .col-lg-9
 
-    = form_tag companies_path, method: :get, class: 'import_form', remote: true, data: {type: :json} do
+    = form_tag search_search_path, method: :get, class: 'import_form', remote: true, data: {type: :json} do
       .col-md-3
-        = select_tag :category, options_for_select(['Company',
-                                                    'Status',
-                                                    'Kind',
-                                                    'Invoice num',
-                                                    'Reporter']), class: 'form-control'
+        = select_tag :category, options_for_select(['Company', 'Operation']), class: 'form-control'
       .col-md-7
         = search_field_tag :query, '', class: 'form-control', placeholder: 'Please write text for search'
       .col-md-2

@@ -1,0 +1,18 @@
+tbody
+  tr id="operation_#{@operation['id']}"
+    td
+      = @operation['invoice_num']
+    td
+      = @operation['invoice_date']
+    td
+      = @operation['operation_date']
+    td
+      = @operation['amount']
+    td
+      = @operation['reporter']
+    td
+      = @operation['status']
+    td
+      = @operation['kind']
+
+

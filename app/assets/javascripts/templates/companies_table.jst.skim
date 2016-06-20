@@ -1,0 +1,4 @@
+.container
+  table.table
+    tbody
+      .companies_list

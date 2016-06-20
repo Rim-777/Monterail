@@ -1,0 +1,4 @@
+tr
+  td id="company_#{@company_id}"
+    = @company_name
+    |:

@@ -1,0 +1,21 @@
+table.table.operations_table id="company_#{@company_id}_operations_table"
+  thead
+    tr
+      td
+        | Invoice num:
+      td
+        | Invoice date:
+      td
+        | Operation date:
+      td
+        | Amount:
+      td
+        | Reporter:
+      td
+        | Status:
+      td
+        | Kind:
+
+
+
+

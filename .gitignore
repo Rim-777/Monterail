@@ -16,3 +16,5 @@
 config/database.yml
 spec/support/files/ImporterAppExample.csv
 /public/uploads
+config/*.sphinx.conf
+db/sphinx
