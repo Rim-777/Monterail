@@ -1,10 +1,10 @@
 class CompanySerializer < ActiveModel::Serializer
-  attributes :id, :name, :operations_numbers, :average_amount, :highest_month_operations, :accepted_operations_num
+  attributes :id, :name, :operations_number, :average_amount, :highest_month_operations, :accepted_operations_num
 
   has_many :operations
 
-  def operations_numbers
-    object.operations_numbers
+  def operations_number
+    object.operations_number
   end
 
   def average_amount

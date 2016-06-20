@@ -1,7 +1,5 @@
 # encoding: utf-8
-
 class FileUploader < CarrierWave::Uploader::Base
-
   storage :file
 
   def store_dir
@@ -11,5 +9,4 @@ class FileUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     %w(csv)
   end
-
 end

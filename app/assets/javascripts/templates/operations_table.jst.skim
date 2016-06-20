@@ -15,7 +15,3 @@ table.table.operations_table id="company_#{@company_id}_operations_table"
         | Status:
       td
         | Kind:
-
-
-
-

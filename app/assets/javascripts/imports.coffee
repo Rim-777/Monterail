@@ -4,18 +4,12 @@ jQuery ->
 
     if data_is_operations(json_data)
       operation_list = json_data
-
       $('.companies').html(JST["templates/companies_table"]())
-
       for operation in  operation_list
         company_id = operation['company_id']
-        if company_row_absent(company_id)
-          add_company_row(operation['company_name'], company_id)
-
-        if company_operation_table_absent(company_id)
-          add_company_operation_table(company_id)
+        add_company_row(operation['company_name'], company_id) if company_row_absent(company_id)
+        add_company_operation_table(company_id) if company_operation_table_absent(company_id)
         $('#company_' + company_id + '_operations_table').append(JST["templates/operation"]({operation: operation}))
-
     else
       companies_list = json_data
       $('.companies').html(JST["templates/companies"]({companies: companies_list}))
@@ -23,7 +17,6 @@ jQuery ->
     errors = $.parseJSON(xhr.responseText)
     message = errors['errors']['name']
     $('.errors').html(JST["templates/errors"]({message: message}))
-
 
 data_is_operations= (data)->
   !! data[0] && data[0]['company_name']

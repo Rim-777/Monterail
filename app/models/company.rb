@@ -2,7 +2,7 @@ class Company < ActiveRecord::Base
   has_many :operations
   validates_presence_of :name
 
-  def operations_numbers
+  def operations_number
     operations.count
   end
 
@@ -15,7 +15,8 @@ class Company < ActiveRecord::Base
   end
 
   def highest_month_operations
-    operations.where(operation_date: Date.today.beginning_of_month..Date.today.end_of_month,
-                            amount: operations.maximum(:amount)).size
+    operation =  operations.where(operation_date: Date.today.beginning_of_month..Date.today.end_of_month,
+                            amount: operations.maximum(:amount)).first
+      operation ? operation.amount: 0
   end
 end

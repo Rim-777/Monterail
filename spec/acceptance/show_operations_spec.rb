@@ -2,7 +2,6 @@ require_relative 'acceptance_helper'
 
 feature 'Show operations by Companies', %q{
 I want to be able to see all operations grouped by Companies} do
-
   given!(:company_one) { create(:company) }
   given!(:company_two) { create(:company) }
 
@@ -31,9 +30,10 @@ I want to be able to see all operations grouped by Companies} do
   describe 'all data' do
     scenario 'user can get list all operations grouped by Companies ', js: true do
       click_on 'Get Operations'
+      sleep(1)
       within "#company_#{company_one.id}" do
         expect(page).to have_content company_one.name
-        expect(page).to have_content company_one.operations_numbers
+        expect(page).to have_content company_one.operations_number
         expect(page).to have_content company_one.average_amount
         expect(page).to have_content company_one.accepted_operations_num
         expect(page).to have_content company_one.highest_month_operations
@@ -49,7 +49,7 @@ I want to be able to see all operations grouped by Companies} do
 
       within "#company_#{company_two.id}" do
         expect(page).to have_content company_two.name
-        expect(page).to have_content company_two.operations_numbers
+        expect(page).to have_content company_two.operations_number
         expect(page).to have_content company_two.average_amount
         expect(page).to have_content company_two.accepted_operations_num
         expect(page).to have_content company_two.highest_month_operations

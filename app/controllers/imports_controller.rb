@@ -1,9 +1,10 @@
 class ImportsController < ApplicationController
-respond_to :json
+  respond_to :json
+
   def create
-    @import = Import.create(import_params)
+    @import = Import.create(import_params) if params[:import]
     ImportJob.perform_later(@import)
-    render nothing: true
+    redirect_to companies_path
   end
 
   private

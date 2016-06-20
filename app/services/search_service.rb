@@ -13,7 +13,7 @@ class SearchService
   end
 
   def escaped_query
-    Riddle::Query.escape(query)
+    Riddle::Query.escape(query.to_s)
   end
 
   def search_type

@@ -14,5 +14,3 @@ tbody
       = @operation['status']
     td
       = @operation['kind']
-
-
