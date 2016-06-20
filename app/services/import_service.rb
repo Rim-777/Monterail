@@ -7,8 +7,10 @@ class ImportService
   end
 
   def perform!
-    CSV.foreach(file, headers: true) do |row|
-      create_operation_by(row)
+    if file_is_valid?
+      CSV.foreach(file, headers: true) do |row|
+        create_operation_by(row)
+      end
     end
   end
 
@@ -17,13 +19,13 @@ class ImportService
     if row.present?
       operation = Operation.find_or_initialize_by(
           company_id: (find_company(row['company'])),
-          invoice_num: (row['invoice_num']),
+          invoice_num: (formatted_name row['invoice_num']),
           invoice_date: date(row['invoice_date']),
           operation_date: date(row['operation_date']),
           amount: (formatted_decimal(row['amount'])),
-          reporter: (row['reporter']),
-          notes: (row['notes']),
-          status: (row['status']),
+          reporter: (formatted_name row['reporter']),
+          notes: (formatted_name row['notes']),
+          status: (formatted_name row['status']),
           kind: (row['kind'])
       )
       operation.add_categories! if operation.save
@@ -64,5 +66,9 @@ class ImportService
 
   def formatted_decimal(amount)
     amount.to_d if amount
+  end
+
+  def file_is_valid?
+    file.to_s.split('\\').last.split('/').last.split('.').last == 'csv'
   end
 end

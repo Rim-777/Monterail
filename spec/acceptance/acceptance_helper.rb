@@ -26,4 +26,9 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.before(:suite) do
+    ThinkingSphinx::Test.init
+    ThinkingSphinx::Test.start_with_autostop
+  end
 end
