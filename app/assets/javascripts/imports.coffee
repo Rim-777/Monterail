@@ -13,6 +13,7 @@ jQuery ->
     else
       companies_list = json_data
       $('.companies').html(JST["templates/companies"]({companies: companies_list}))
+
   .bind 'ajax:error', (e, xhr, status, error) ->
     errors = $.parseJSON(xhr.responseText)
     message = errors['errors']['name']

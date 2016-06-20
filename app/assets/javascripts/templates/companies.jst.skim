@@ -42,17 +42,14 @@
 
             - for operation in company['operations']
 
-              -if company['operations'].indexOf(operation) < 4
-
-
-                tr id="operation_#{operation['id']}"
-                  td
-                    = operation['invoice_num']
-                  td
-                    = operation['operation_date']
-                  td
-                    = operation['amount']
-                  td
-                    = operation['reporter']
-                  td
-                    = operation['status']
+              tr id="operation_#{operation['id']}"
+                td
+                  = operation['invoice_num']
+                td
+                  = operation['operation_date']
+                td
+                  = operation['amount']
+                td
+                  = operation['reporter']
+                td
+                  = operation['status']

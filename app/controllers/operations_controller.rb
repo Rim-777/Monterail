@@ -1,4 +1,3 @@
-require 'tempfile'
 class OperationsController < ApplicationController
   respond_to :json
 
