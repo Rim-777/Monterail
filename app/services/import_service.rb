@@ -26,7 +26,7 @@ class ImportService
           reporter: (formatted_name row['reporter']),
           notes: (formatted_name row['notes']),
           status: (formatted_name row['status']),
-          kind: (row['kind'])
+          kind: (formatted_name row['kind'])
       )
       operation.add_categories! if operation.save
     end
