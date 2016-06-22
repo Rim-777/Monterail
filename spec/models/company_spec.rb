@@ -37,7 +37,7 @@ RSpec.describe Company, type: :model do
 
 
   describe '#create_operations_csv(file)' do
-    it 'should  receive destroy_all for User class' do
+    it 'should receive :open for CSV class' do
       file = Tempfile.new(["operations", '.csv'])
       expect(CSV).to receive(:open).with(file.path, "wb")
       company.create_operations_csv(file)
