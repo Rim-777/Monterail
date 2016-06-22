@@ -3,13 +3,12 @@ class ImportsController < ApplicationController
   respond_to :json
 
   def create
-    @import = Import.create(import_params) if
+    @import = Import.create(import_params)
     ImportJob.perform_later(@import)
     redirect_to companies_path
   end
 
   private
-
   def check_import
     render json: {message: 'No file'} unless params[:import]
   end
