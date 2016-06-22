@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'csv'
 
 RSpec.describe Company, type: :model do
   it { should have_many(:operations) }
@@ -31,6 +32,15 @@ RSpec.describe Company, type: :model do
   describe '#highest_month_operations' do
     it 'return highest month operation of Company during current month ' do
       expect(other_company.highest_month_operations).to eq 2000000
+    end
+  end
+
+
+  describe '#create_operations_csv(file)' do
+    it 'should  receive destroy_all for User class' do
+      file = Tempfile.new(["operations", '.csv'])
+      expect(CSV).to receive(:open).with(file.path, "wb")
+      company.create_operations_csv(file)
     end
   end
 end

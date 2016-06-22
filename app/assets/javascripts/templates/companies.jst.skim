@@ -12,6 +12,8 @@
           | Highest month operation:
         td
           | Number of accepted operations
+          td
+            | CSV Files:
     tbody
       - for company in @companies
 
@@ -19,13 +21,16 @@
           td
             = company['name']
           td
-            = company['operations_numbers']
+            = company['operations_number']
           td
             = company['average_amount']
           td
             = company['highest_month_operations']
           td
             = company['accepted_operations_num']
+          td
+            a href="/companies/#{company['id']}/files" data-target="_self" rel="nofollow" data-method="post" class="btn btn-warning"
+              |Download CSV
         tr
           td
             tr
@@ -53,3 +58,5 @@
                   = operation['reporter']
                 td
                   = operation['status']
+
+

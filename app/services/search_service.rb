@@ -9,7 +9,7 @@ class SearchService
 
   private
   def search
-    search_type.search escaped_query,  :max_matches => 10_000, :per_page => 100000
+    search_type.search escaped_query,  :max_matches => 10_000, :per_page => 10
   end
 
   def escaped_query

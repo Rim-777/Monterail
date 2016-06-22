@@ -3,16 +3,17 @@
     .errors
     .col-lg-9
       = form_tag search_search_path, method: :get, class: 'import_form', remote: true, data: {type: :json} do
-        .col-md-3
+        .col-lg-3
           = select_tag :category, options_for_select(['Company', 'Operation']), class: 'form-control'
-        .col-md-7
+        .col-lg-7
           = search_field_tag :query, '', class: 'form-control', placeholder: 'Please write text for search'
-        .col-md-2
+        .col-lg-2
           = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
     .col-lg-3
-      = form_for Import.new, method: :post, remote: true, data: {type: :json} do |f|
-        = f.file_field :file, class: 'form-control'
-        br
-        = f.submit 'Import', class: 'btn btn-info'
+      = form_for Import.new, method: :post, target: '_self', remote:true, data: {type: :json}  do |f|
+        .col-lg-7
+          = f.file_field :file, class: 'form-control'
+        .col-lg-3
+          = f.submit 'Import', class: 'btn btn-info'
     br
   .row.companies
