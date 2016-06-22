@@ -24,22 +24,22 @@ RSpec.describe Operation, type: :model do
     context 'new category' do
       let!(:operation) { create(:operation, kind: 'new_category;') }
 
-      it 'create new category in database' do
+      it 'creates a new category in the database' do
         expect { described_method }.to change(Category, :count).by(1)
       end
 
-      it 'create new category in database for operation' do
+      it 'create a new category in  the database for the operation' do
         expect { described_method }.to change(operation.categories, :count).by(1)
       end
 
-      it 'change operation number for category' do
+      it 'changes an operation number for the category' do
         described_method
         expect(Category.first.operations.size).to eq 1
       end
 
       it_behaves_like 'Categoriable'
 
-      it "capitalize category name" do
+      it "capitalizes category name" do
         described_method
         expect(operation.categories.first.name).to eq "New_category"
       end
@@ -53,7 +53,7 @@ RSpec.describe Operation, type: :model do
         expect { described_method }.to_not change(Category, :count)
       end
 
-      it 'change operation number for category' do
+      it 'changes an operation number for the category' do
         expect(Category.first.operations.size).to eq 0
         described_method
         expect(Category.first.operations.size).to eq 1
@@ -71,7 +71,7 @@ RSpec.describe Operation, type: :model do
           expect { described_method }.to_not change(Category, :count)
         end
 
-        it 'create only one categories_operation in database' do
+        it 'creates only one categories_operation in the database' do
           expect { described_method }.to change(CategoriesOperation, :count).by(1)
         end
       end
@@ -79,11 +79,11 @@ RSpec.describe Operation, type: :model do
       context 'new_category' do
         let!(:operation) { create(:operation, kind: 'new_category;New_category;new_category') }
 
-        it 'create only one new category in database' do
+        it 'creates only one new category in the database' do
           expect { described_method }.to change(Category, :count).by(1)
         end
 
-        it 'create only one categories_operation in database' do
+        it 'creates only one categories_operation in the database' do
           expect { described_method }.to change(CategoriesOperation, :count).by(1)
         end
       end

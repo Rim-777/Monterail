@@ -28,7 +28,7 @@ I want to be able to see all operations grouped by Companies} do
   end
 
   describe 'all data' do
-    scenario 'user can get list all operations grouped by Companies ', js: true do
+    scenario 'user can get list of all operations grouped by Companies ', js: true do
       click_on 'Get Operations'
       sleep(1)
       within "#company_#{company_one.id}" do

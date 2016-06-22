@@ -16,46 +16,46 @@ describe 'import service' do
     let(:perform!) { import.perform! }
 
     describe 'success' do
-      it 'change operations number to database' do
+      it 'changes operations number to database' do
         expect { perform! }.to change(Operation, :count).by(1)
       end
 
       context 'operations' do
         before { perform! }
 
-        it 'assign company id for new operation' do
+        it 'assigns company id for a new operation' do
           expect(Operation.first.company_id).to eq company_one.id
         end
 
-        it 'assign invoice num for new operation' do
+        it 'assigns invoice num for a new operation' do
           expect(Operation.first.invoice_num).to eq 'testInvoiceNum'
         end
 
-        it 'assign invoice date for new operation' do
+        it 'assigns invoice date for a new operation' do
           expect(Operation.first.invoice_date).to eq Date.new(2014, 10, 19)
         end
 
-        it 'assign operation date for new operation' do
+        it 'assign the operation date for a new operation' do
           expect(Operation.first.operation_date).to eq Date.new(2014, 10, 11)
         end
 
-        it 'assign amount date for new operation' do
+        it 'assigns an amount date for a new operation' do
           expect(Operation.first.amount).to eq 18068.43
         end
 
-        it 'assign reporter for new operation' do
+        it 'assigns the reporter for a new operation' do
           expect(Operation.first.reporter).to eq 'TestReporter'
         end
 
-        it 'assign notes for new operation' do
+        it 'assigns notes for a new operation' do
           expect(Operation.first.notes).to eq 'TestNotes'
         end
 
-        it 'assign status for new operation' do
+        it 'assigns status for a new operation' do
           expect(Operation.first.status).to eq 'TestStatus'
         end
 
-        it 'assign kind for new operation' do
+        it 'assigns kind for new operation' do
           expect(Operation.first.kind).to eq 'category_1;category_2;category_3'
         end
       end
@@ -72,15 +72,15 @@ describe 'import service' do
       let!(:existing_operation_for_unique_invoice_num) { create(:operation, invoice_num: 'UniqueInvoiceNum') }
       let!(:file) { Rails.root.join("spec/support/files/invalid_import_test.csv") }
 
-      it 'will not add new operations in database' do
+      it 'will not add a new operations in the database' do
         expect { perform! }.to_not change(Operation, :count)
       end
 
-      it 'will not add new categories_operations in database' do
+      it 'will not add a new categories_operations in the database' do
         expect { perform! }.to_not change(CategoriesOperation, :count)
       end
 
-      it 'will not add new categories in database' do
+      it 'will not add a new categories in the database' do
         expect { perform! }.to_not change(Category, :count)
       end
     end
@@ -89,7 +89,7 @@ describe 'import service' do
       describe '#find_company' do
         let!(:company_one) { create(:company, name: 'CompanyName') }
 
-        it 'return company id' do
+        it 'returns a company id' do
           expect(import.send(:find_company, 'CompanyName')).to eq company_one.id
         end
       end
@@ -99,11 +99,11 @@ describe 'import service' do
         dates = ['2016-16-03', '2016-03-16', '03-16-2016', '03-2016-16', '16-03-2016', '16-2016-03',
                  '2016/16/03', '16/2016/03', '03/16/2016', '2016.16.03', '16.2016.03', '03.16.2016']
 
-        it 'return nil if number of days is invalid' do
+        it 'returns nil if the number of days is invalid' do
           expect(import.send(:formatted_date, Date._parse('32-12-2016'))).to eq nil
         end
 
-        it 'return nil if number of months is invalid' do
+        it 'return nil if the number of months is invalid' do
           expect(import.send(:formatted_date, Date._parse('19-19-2016'))).to eq nil
         end
 
