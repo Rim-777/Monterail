@@ -21,6 +21,7 @@ gem 'sinatra', '>= 1.3.0', require: nil
 gem 'sidekiq-status'
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem "eventmachine"
 
 group :development do
   gem 'web-console', '~> 2.0'

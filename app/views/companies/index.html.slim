@@ -10,7 +10,7 @@
         .col-lg-2
           = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
     .col-lg-3
-      = form_for Import.new, method: :post, target: '_self', remote:true, data: {type: :json}  do |f|
+      = form_for Import.new, method: :post, target: '_self', remote:true do |f|
         .col-lg-7
           = f.file_field :file, class: 'form-control'
         .col-lg-3

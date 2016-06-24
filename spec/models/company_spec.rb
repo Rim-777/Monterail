@@ -35,7 +35,6 @@ RSpec.describe Company, type: :model do
     end
   end
 
-
   describe '#create_operations_csv(file)' do
     it 'should receive :open for CSV class' do
       file = Tempfile.new(["operations", '.csv'])
