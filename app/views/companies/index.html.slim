@@ -16,7 +16,7 @@
         .col-lg-3
           = f.submit 'Import', class: 'btn btn-info'
       .row
-        script
+        javascript:
           var socket = new WebSocket("ws://127.0.0.1:9000");
 
             socket.onopen = function() {
