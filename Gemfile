@@ -22,6 +22,8 @@ gem 'sidekiq-status'
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'eventmachine'
+gem 'redis'
+gem 'em-hiredis'
 gem 'em-websocket', '~> 0.5.1'
 
 group :development do
