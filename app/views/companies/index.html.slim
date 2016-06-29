@@ -10,34 +10,42 @@
         .col-lg-2
           = submit_tag "Get Operations", class: 'btn btn-primary', id: 'search_button'
     .col-lg-3
-      = form_for Import.new, method: :post, target: '_self', remote:true do |f|
-        .col-lg-7
-          = f.file_field :file, class: 'form-control'
-        .col-lg-3
-          = f.submit 'Import', class: 'btn btn-info'
       .row
-        javascript:
-          var socket = new WebSocket("ws://127.0.0.1:9000");
+        = form_for Import.new, method: :post, target: '_self', remote: true do |f|
+          .col-lg-7
+            = f.file_field :file, class: 'form-control'
+          .col-lg-3
+            = f.submit 'Import', class: 'btn btn-info'
+      br
+      hr
+      .row.import_info.btn-warning
+      hr
+      br
+      .row.import_info_status.btn-warning
+      hr
 
-            socket.onopen = function() {
-              alert("Соединение установлено.");
-            };
+  .row
+    javascript:
+      var socket = new WebSocket("ws://127.0.0.1:9000");
 
-            socket.onclose = function(event) {
-              if (event.wasClean) {
-                alert('Соединение закрыто чисто');
-              } else {
-                alert('Обрыв соединения');
-              }
-              alert('Код: ' + event.code + ' причина: ' + event.reason);
-            };
+      socket.onopen = function () {
+        $('.import_info').html('The connection by WebSocket established');
+      };
 
-            socket.onmessage = function(event) {
-              alert("Получены данные " + event.data);
-            };
+      socket.onclose = function (event) {
+        if (event.wasClean) {
+          $('.import_info').html('Connection is closed');
+        } else {
+          $('.import_info').html('Connection is interrupted');
+        }
+      };
 
-            socket.onerror = function(error) {
-              alert("Ошибка " + error.message);
-            };
+      socket.onmessage = function (event) {
+        $('.import_info_status').html('Received data ' + event.data);
+      };
+
+      socket.onerror = function (error) {
+
+      };
     br
   .row.companies

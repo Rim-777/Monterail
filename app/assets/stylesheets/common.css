@@ -1,0 +1,7 @@
+footer{
+    position: fixed;
+    top: 95%;
+    left: 10%;
+    border-radius: 5px;
+    color: rgba(12, 21, 154, 0.43);
+}
